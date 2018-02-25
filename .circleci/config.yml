@@ -1,0 +1,20 @@
+﻿version: 2
+jobs:
+  build:
+    working_directory: /temp
+    docker:
+      - image: microsoft/dotnet:sdk
+    environment:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+    steps:
+      - checkout
+      - run: dotnet restore
+      - run: dotnet build
+      - run: dotnet clean -c Release
+      - run: dotnet publish -c Release --output ./published
+      - run: ssh -o "StrictHostKeyChecking no" circle@178.62.60.163 -y rm -rf /app
+      - run: scp -i ~/.ssh/id_rsa_deploy -r ./published circle@178.62.60.163:/home/circle/tipster/app
+      - run: ssh -o "StrictHostKeyChecking no" circle@178.62.60.163 sudo systemctl restart tipster-core-app.service
+
+

@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+@foreach (string city in ViewBag.Countries) {
+<li>@city
+</li>
+}
+
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+<div class="bootstrap-iso">
+<form>
+  <div class="form-group">
+    <label for="RaceCourseName">Race Course Name</label>
+    <input type="text" class="form-control" id="RaceCourseName" aria-describedby="raceformHelp" placeholder="E.g. Aintree"  required="true">
+    <small id="raceformHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="DateRan">Date Ran</label>
+    <input class="form-control" id="DateRan" name="DateRan" placeholder="YYYY-MM-DD" type="text" required="true"/>
+  </div>
+  <div class="form-group">
+    <label for="Amount">Amount Bet</label>
+    <input class="form-control" id="Amount" name="Amount" aria-describedby="Amounthelp" placeholder="123.45" type="text"  required="true"/>
+    <small id="Amounthelp" class="form-text text-muted">How much did you place on this bet?</small>
+  </div>
+  <div class="form-group">
+    <label for="result">Result</label>
+    <select class="form-control" id="result"  required="true">
+      <option disabled='true' selected="true"></option>
+      <option value="won">Won</option>
+      <option value="lost">Lost</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
